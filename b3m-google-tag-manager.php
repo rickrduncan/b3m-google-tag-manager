@@ -8,7 +8,7 @@
 * License:			GPLv3
 * License URI:		https://www.gnu.org/licenses/gpl-3.0.html
 *
-* Version:			1.0.0
+* Version:			1.0.1
 */
 
 
@@ -83,6 +83,7 @@ if ( ! class_exists( 'B3M_Google_Tag_Manager' ) ) {
 		/**
 		 * Step 1 - Insert GTM code into <head> section of page.
 		 *
+		 * @since 1.0.1 Added the datalayer script tag.
 		 * @since 1.0.0
 		 */
 		public static function b3m_gtm_add_head_code() { 
@@ -90,7 +91,8 @@ if ( ! class_exists( 'B3M_Google_Tag_Manager' ) ) {
 			$gtm_id       	= empty( $options['b3m_gtm_id'] ) ? 'WARNING - NO ID SPECIFIED' : $options['b3m_gtm_id'];			// Google Tag Manager id number
 			$gtm_enabled	= empty( $options['b3m_gtm_enabled'] ) ? '' : $options['b3m_gtm_enabled'];	// Check box for enabled/disabled
 
-			if ( ! current_user_can( 'manage_options' ) && ( $gtm_enabled ) )  { //only include GA code for non-admin users and when "on" is checked ?><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?php echo $gtm_id; ?>');</script><!-- End Google Tag Manager --><?php
+			if ( ! current_user_can( 'manage_options' ) && ( $gtm_enabled ) )  { //only include GA code for non-admin users and when "on" is checked ?>
+			<!-- Google Tag Manager --><script>datalayer = [];</script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?php echo $gtm_id; ?>');</script><!-- End Google Tag Manager --><?php
 			}	
 		}
 
