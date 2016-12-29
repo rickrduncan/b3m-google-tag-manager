@@ -8,7 +8,7 @@
 * License:			GPLv3
 * License URI:		https://www.gnu.org/licenses/gpl-3.0.html
 *
-* Version:			1.2.0
+* Version:			2.1.0
 */
 
 
@@ -39,9 +39,9 @@ if ( ! class_exists( 'B3M_Google_Tag_Manager' ) ) {
 			}
 			
 			/**
-			* Add plugin 'Settings' link to the Plugins page
+			* Add plugin 'Settings' link to the plugins page
 			*
-			* @since 1.2.0 Added the datalayer script tag.
+			* @since 2.1.0 Added the datalayer script tag.
 			*/
 			function b3m_gtm_add_settings_link( $links ) {
 			    $settings_link = '<a href="admin.php?page=gtm-settings">' . __( 'Settings' ) . '</a>';
