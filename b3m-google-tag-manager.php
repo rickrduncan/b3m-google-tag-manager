@@ -8,7 +8,7 @@
 * License:			GPLv3
 * License URI:		https://www.gnu.org/licenses/gpl-3.0.html
 *
-* Version:			2.0.0
+* Version:			1.2.0
 */
 
 
@@ -30,8 +30,23 @@ if ( ! class_exists( 'B3M_Google_Tag_Manager' ) ) {
 
 			// We only need to register the admin panel on the back-end
 			if ( is_admin() ) {
+				
+				$plugin = plugin_basename( __FILE__ );
+				add_filter( "plugin_action_links_$plugin", 'b3m_gtm_add_settings_link' );
+				
 				add_action( 'admin_menu', array( 'B3M_Google_Tag_Manager', 'b3m_gtm_add_admin_menu' ) );
 				add_action( 'admin_init', array( 'B3M_Google_Tag_Manager', 'b3m_gtm_register_settings' ) );
+			}
+			
+			/**
+			* Add plugin 'Settings' link to the Plugins page
+			*
+			* @since 1.2.0 Added the datalayer script tag.
+			*/
+			function b3m_gtm_add_settings_link( $links ) {
+			    $settings_link = '<a href="admin.php?page=gtm-settings">' . __( 'Settings' ) . '</a>';
+			    array_unshift($links, $settings_link);
+			  	return $links;
 			}
 			
 			// Load GTM container code (Part 1) in <head>
@@ -41,7 +56,7 @@ if ( ! class_exists( 'B3M_Google_Tag_Manager' ) ) {
 			// Load GTM container code (Part 2) in <body>
 			add_action( 'genesis_before', array( $this, 'b3m_gtm_add_body_code' ) );
 		}
-
+		
 
 		/**
 		 * Returns all theme options
